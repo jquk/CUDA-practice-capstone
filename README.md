@@ -45,7 +45,6 @@ Check the Makefile.
 - Run `make mnist_titestongpu` to build the program that does Training Inference and Test on the GPU.
 
 3. **Execute the Programs:**
-
 Run the compiled executables.
 - Run `./mnist_titest` to run the program that uses the CPU.
 - Run `./mnist_titest_on_gpu` to run the program that uses the GPU.
