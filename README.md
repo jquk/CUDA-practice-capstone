@@ -1,7 +1,7 @@
-# Minimalist MNIST Inference Engine with CUDA and cuDNN Acceleration
+# Minimalist MNIST Inference Engine, Compare CPU vs GPU with CUDA and cuDNN Acceleration
 **Project Purpose:** This project demonstrates the acceleration of a minimalist neural network for MNIST digit recognition using CUDA and the cuDNN library.
 
-The goal is to illustrate the process and advantages of integrating GPU acceleration for computationally intensive tasks in a simple deep learning model, as compared to executing the training and inference in the CPU.
+The goal is to illustrate the process and **advantages of integrating GPU acceleration** for computationally intensive tasks in a simple deep learning model, **as compared to executing the training and inference in the CPU**.
 
 *Upon execution of each program, the test accuracy and execution time is shown, thus it's possible to compare accuracy and execution time results for the CPU and GPU.*
 
