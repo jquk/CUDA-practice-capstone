@@ -41,18 +41,14 @@ gunzip t10k-labels-idx1-ubyte.gz
 
 2. **Compile the Code:**
 Check the Makefile.
-
-Run `make mnist_titest` to build the program that does Training Inference and Test on the CPU.
-
-Run `make mnist_titestongpu` to build the program that does Training Inference and Test on the GPU.
+- Run `make mnist_titest` to build the program that does Training Inference and Test on the CPU.
+- Run `make mnist_titestongpu` to build the program that does Training Inference and Test on the GPU.
 
 3. **Execute the Programs:**
 
 Run the compiled executables.
-
-Run `./mnist_titest` to run the program that uses the CPU.
-
-Run `./mnist_titest_on_gpu` to run the program that uses the GPU.
+- Run `./mnist_titest` to run the program that uses the CPU.
+- Run `./mnist_titest_on_gpu` to run the program that uses the GPU.
 
 Both programs will load the dataset, initialize the neural network on the CPU/GPU, train the model for a specified number of epochs, and then evaluate its accuracy on the test set, printing the progress and final accuracy to the console as well execution time.
 
