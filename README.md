@@ -25,7 +25,7 @@ The core computational parts of the network, specifically matrix multiplications
 * **cuBLAS:** A library providing optimized basic linear algebra subprograms for matrix multiplications.
 * **cuDNN:** A library providing highly tuned primitives for deep neural networks, used here for activation functions and bias addition.
 
-Note that even in the GPU-oriented program the data loading and initial setup are handled on the host (CPU), while the forward and backward passes during training and the forward pass during inference are performed on the device (GPU).
+Note that even in the GPU-oriented program the data loading and initial setup are handled on the host (CPU), while the forward and backward passes during training and the forward pass during inference are performed on the host for the CPU-oriented program and on the GPU for the GPU-oriented program.
 
 # Building and Execution
 The project is implemented in C++ with CUDA extensions. To build and run the project in a compatible environment, follow these steps:
