@@ -47,7 +47,7 @@ Run the compiled executables.
 
 # System Requirements
 Execution of the compiled code requires a CUDA-enabled GPU and compatible CUDA driver and runtime versions.
-The GPU and NVIDIA driver used for the development are:
+The GPU and NVIDIA driver used for the development during the development were:
 - NVIDIA GPU: GeForce RTX 5090.
 - NVIDIA driver version: 575.64.03.
 - CUDA version: 12.9.
