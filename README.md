@@ -1,9 +1,15 @@
 # Minimalist MNIST Inference Engine, Compare CPU vs GPU with CUDA and cuDNN Acceleration
 **Project Purpose:** This project demonstrates the acceleration of a minimalist neural network for MNIST digit recognition using CUDA and the cuDNN library.
 
-The goal is to illustrate the process and **advantages of integrating GPU acceleration** for computationally intensive tasks in a simple deep learning model, **as compared to executing the training and inference in the CPU**.
+Following the instructions of this README file, you will be able to download the MNIST digits dataset, and build two programs, one meant to run completely on the CPU, and another meant to do the heavy stuff run on the GPU. Both programs have a similar flow:
+1. Load the MNIST digits dataset.
+2. Initialize the neural network on the target (be it CPU or GPU).
+3. Train the model for a specified number of epochs.
+4. Evaluate its accuracy on the test set, printing the progress and final accuracy to the console as well execution time.
 
-*Upon execution of each program, the test accuracy and execution time is shown, thus it's possible to compare accuracy and execution time results for the CPU and GPU.*
+After both programs are finished, you can compare the test results for accuracy, and the execution time, typically being both metrics remarkably better in the program that runs on the GPU.  
+
+The goal is to illustrate the process and **advantages of integrating GPU acceleration** for computationally intensive tasks in a simple deep learning model, **as compared to executing the training and inference in the CPU**.
 
 # Architecture
 The project implements a two-layer fully connected neural network (MLP).
@@ -24,32 +30,20 @@ Note that even in the GPU-oriented program the data loading and initial setup ar
 # Building and Execution
 The project is implemented in C++ with CUDA extensions. To build and run the project in a compatible environment, follow these steps:
 
-1. **Download the MNIST Dataset:** The required MNIST dataset files (train-images-idx3-ubyte, train-labels-idx1-ubyte, t10k-images-idx3-ubyte, t10k-labels-idx1-ubyte) need to be downloaded. The provided code includes wget commands to download these from a public mirror.
+1. **Download the MNIST Dataset:** The required MNIST dataset files need to be downloaded from a public mirror. You can simply run the following command:
 ```
-wget https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
-wget https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
-wget https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
-wget https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-labels-idx1-ubyte.gz
-
-gunzip train-images-idx3-ubyte.gz
-gunzip train-labels-idx1-ubyte.gz
-gunzip t10k-images-idx3-ubyte.gz
-gunzip t10k-labels-idx1-ubyte.gz
+make download_mnist
 ```
 
-**Note:** The programs expect to find these assets under the following path: `/content`.
+**Note:** The programs expect to find these assets under the following path: `/content`, but the Makefile rule already takes care of placing the dataset there.
 
 2. **Compile the Code:**
 Check the Makefile.
-- Run `make mnist_titest` to build the program that does Training Inference and Test on the CPU.
-- Run `make mnist_titestongpu` to build the program that does Training Inference and Test on the GPU.
+Run `make all`, which will build both programs, the one for the CPU and the one for the GPU.
 
 3. **Execute the Programs:**
 Run the compiled executables.
-- Run `./mnist_titest` to run the program that uses the CPU.
-- Run `./mnist_titest_on_gpu` to run the program that uses the GPU.
-
-Both programs will load the dataset, initialize the neural network on the CPU/GPU, train the model for a specified number of epochs, and then evaluate its accuracy on the test set, printing the progress and final accuracy to the console as well execution time.
+- Run `make run` to run both programs, firstly the CPU-oriented program and secondly the GPU-oriented program.
 
 # System Requirements
 Execution of the compiled code requires a CUDA-enabled GPU and compatible CUDA driver and runtime versions.

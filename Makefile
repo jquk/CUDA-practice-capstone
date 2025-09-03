@@ -1,5 +1,5 @@
-# Download MNIST dataset and move it to the expected path
-download:
+# Download MNIST digits dataset and move it to the expected path
+download_mnist:
 	wget https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-images-idx3-ubyte.gz
 	wget https://storage.googleapis.com/tensorflow/tf-keras-datasets/train-labels-idx1-ubyte.gz
 	wget https://storage.googleapis.com/tensorflow/tf-keras-datasets/t10k-images-idx3-ubyte.gz
@@ -27,3 +27,20 @@ titest:
 titestongpu:
 	mkdir -p bin
 	nvcc mnist_titest_on_gpu.cpp -o bin/mnist_titest_on_gpu -std=c++11 -lcudnn -lcublas
+
+all:
+	$(MAKE) titest
+	$(MAKE) titestongpu
+
+run:
+	@echo "Running MNIST training, inference, and test on CPU..."
+	./bin/mnist_titest
+	@echo "Running MNIST training, inference, and test on GPU..."
+	./bin/mnist_titest_on_gpu
+
+clean:
+	@echo "Cleaning up..."
+	rm bin/*
+
+delete_assets:
+	rm -rf /content/
