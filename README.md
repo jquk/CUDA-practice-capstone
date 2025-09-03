@@ -35,11 +35,11 @@ The project is implemented in C++ with CUDA extensions. To build and run the pro
 make download_mnist
 ```
 
-**Note:** The programs expect to find these assets under the following path: `/content`, but the Makefile rule already takes care of placing the dataset there.
+- **Note:** The programs expect to find these assets under the following path: `/content`, but the Makefile rule already takes care of placing the dataset there.
 
 2. **Compile the Code:**
 Check the Makefile.
-Run `make all`, which will build both programs, the one for the CPU and the one for the GPU.
+- Run `make all`, which will build both programs, the one for the CPU and the one for the GPU.
 
 3. **Execute the Programs:**
 Run the compiled executables.
