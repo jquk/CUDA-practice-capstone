@@ -13,10 +13,10 @@ download_mnist:
 	mkdir -p content
 	mv content /
 
-	mv train-images-idx3-ubyte.gz /content/
-	mv train-labels-idx1-ubyte.gz /content/
-	mv t10k-images-idx3-ubyte.gz /content/
-	mv t10k-labels-idx1-ubyte.gz /content/
+	mv train-images-idx3-ubyte /content/
+	mv train-labels-idx1-ubyte /content/
+	mv t10k-images-idx3-ubyte /content/
+	mv t10k-labels-idx1-ubyte /content/
 
 # Compile the program that will perform training inference and tests on the CPU
 titest:
