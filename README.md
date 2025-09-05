@@ -34,10 +34,7 @@ Note that even in the GPU-oriented program the data loading and initial setup ar
 # Building and Execution
 The project is implemented in C++ with CUDA extensions. To build and run the project in a compatible environment, follow these steps:
 
-1. **Download the MNIST Dataset:** The required MNIST dataset files need to be downloaded from a public mirror. You can simply run the following command:
-```
-make download_mnist
-```
+1. **Download the MNIST Dataset:** The required MNIST dataset files need to be downloaded from a public mirror. You can simply run the command `make download_mnist`.
 
 - **Note:** The programs expect to find these assets under the following path: `/content`, but the Makefile rule already takes care of placing the dataset there.
 
