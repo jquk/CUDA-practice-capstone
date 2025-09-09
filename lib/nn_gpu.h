@@ -1,8 +1,6 @@
 #ifndef NEURALNETWORKGPU_H
 #define NEURALNETWORKGPU_H
 
-#include "gpu_helpers.h"
-
 class NeuralNetworkGPU {
 private:
 
