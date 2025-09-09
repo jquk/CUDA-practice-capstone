@@ -1,6 +1,8 @@
 #ifndef NEURALNETWORKGPU_H
 #define NEURALNETWORKGPU_H
 
+#include <cublas_v2.h>
+
 class NeuralNetworkGPU {
 private:
 
