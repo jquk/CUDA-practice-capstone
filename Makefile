@@ -11,7 +11,7 @@ download_mnist:
 	gunzip t10k-labels-idx1-ubyte.gz
 
 	mkdir -p content
-	mv content /
+	mv content ~
 
 	mv train-images-idx3-ubyte ~/content/
 	mv train-labels-idx1-ubyte ~/content/
