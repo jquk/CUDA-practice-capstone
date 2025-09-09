@@ -11,8 +11,8 @@
 #include <cublas_v2.h>
 
 
-#include "lib/nn_gpu.h"
-#include "lib/helpers.h"
+#include "../lib/nn_gpu.h"
+#include "../lib/helpers.h"
 
 int main() {
     // Start measuring time
