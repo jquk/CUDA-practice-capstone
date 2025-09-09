@@ -1,5 +1,7 @@
 #include <cuda_runtime.h>
 
+#include "gpu_helpers.h"
+
 // Function to allocate device memory
 template<typename T> T* allocate_device_memory(size_t size) {
     T* device_ptr;
