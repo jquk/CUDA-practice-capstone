@@ -1,3 +1,6 @@
+#ifndef GPU_HELPERS_H
+#define GPU_HELPERS_H
+
 #include <cstddef>
 #include <iostream>
 #include <cudnn.h>
@@ -46,3 +49,5 @@ template<typename T> void host_to_device(const T* host_ptr, T* device_ptr, size_
 
 // Function to transfer data from device to host
 template<typename T> void device_to_host(const T* device_ptr, T* host_ptr, size_t size);
+
+#endif // GPU_HELPERS_H
