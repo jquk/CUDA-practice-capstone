@@ -487,7 +487,7 @@ int main() {
             // Backward pass on GPU
             model.backward_gpu(model.d_input, train_labels[i], learning_rate);
         }
-        std::cout << "Epoch " << epoch + 1 << " completed. Average loss: " << total_loss / train_images.size() << std::endl;
+        std::cout << "Epoch " << epoch << " completed. Average loss: " << total_loss / train_images.size() << std::endl;
     }
     std::cout << "GPU Training finished." << std::endl;
 

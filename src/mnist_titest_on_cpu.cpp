@@ -279,7 +279,7 @@ int main() {
             // Backward pass and weight update
             model.backward(train_images[i], hidden_output, output, train_labels[i], learning_rate);
         }
-        std::cout << "Epoch " << epoch + 1 << " completed. Average loss: " << total_loss / train_images.size() << std::endl;
+        std::cout << "Epoch " << epoch << " completed. Average loss: " << total_loss / train_images.size() << std::endl;
     }
     std::cout << "Training finished." << std::endl;
 
