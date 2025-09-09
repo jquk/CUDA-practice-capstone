@@ -1,5 +1,6 @@
 #include <cstddef>
 #include <iostream>
+#include <cudnn.h>
 
 // Helper function for checking CUDA errors
 #define CUDA_CHECK(call)                                                    \
