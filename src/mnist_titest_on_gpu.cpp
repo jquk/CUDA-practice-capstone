@@ -12,6 +12,7 @@
 
 
 #include "../lib/nn_gpu.h"
+#include "../lib/gpu_helpers.h"
 #include "../lib/helpers.h"
 
 int main() {
