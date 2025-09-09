@@ -3,6 +3,8 @@
 
 class NeuralNetworkGPU {
 private:
+
+public:
     // Device pointers for weights, biases, and intermediate results
     double* d_weights1;
     double* d_bias1;
@@ -32,7 +34,6 @@ private:
     // cuBLAS handle
     cublasHandle_t cublas;
 
-public:
     NeuralNetworkGPU(int input_size, int hidden_size, int output_size);
     ~NeuralNetworkGPU();
     void forward_gpu(const double* d_input_data);
