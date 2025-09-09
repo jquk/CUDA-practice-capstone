@@ -444,12 +444,12 @@ int main() {
     auto start = std::chrono::high_resolution_clock::now();
 
     // Load training data
-    std::vector<std::vector<double>> train_images = read_mnist_images("/content/train-images-idx3-ubyte");
-    std::vector<int> train_labels = read_mnist_labels("/content/train-labels-idx1-ubyte");
+    std::vector<std::vector<double>> train_images = read_mnist_images("~/content/train-images-idx3-ubyte");
+    std::vector<int> train_labels = read_mnist_labels("~/content/train-labels-idx1-ubyte");
 
     // Load testing data
-    std::vector<std::vector<double>> test_images = read_mnist_images("/content/t10k-images-idx3-ubyte");
-    std::vector<int> test_labels = read_mnist_labels("/content/t10k-labels-idx1-ubyte");
+    std::vector<std::vector<double>> test_images = read_mnist_images("~/content/t10k-images-idx3-ubyte");
+    std::vector<int> test_labels = read_mnist_labels("~/content/t10k-labels-idx1-ubyte");
 
     if (train_images.empty() || train_labels.empty() || test_images.empty() || test_labels.empty()) {
         std::cerr << "Failed to load MNIST data." << std::endl;
