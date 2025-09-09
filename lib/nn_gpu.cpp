@@ -1,5 +1,6 @@
 #include <vector>
 #include <cudnn.h>
+#include <random>
 
 #include "nn_gpu.h"
 #include "gpu_helpers.h"

@@ -4,7 +4,6 @@
 #include <vector>
 #include <cmath>
 #include <numeric>
-#include <random>
 #include <cuda_runtime.h>
 #include <device_launch_parameters.h>
 #include <cudnn.h>
