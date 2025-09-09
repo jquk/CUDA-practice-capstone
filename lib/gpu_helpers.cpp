@@ -1,4 +1,3 @@
-#include <cstddef>
 #include <cuda_runtime.h>
 
 // Function to allocate device memory
