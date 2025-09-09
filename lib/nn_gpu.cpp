@@ -1,3 +1,5 @@
+#include <cudnn.h>
+
 #include "nn_gpu.h"
 #include "gpu_helpers.h"
 
