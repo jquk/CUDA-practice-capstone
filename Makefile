@@ -19,22 +19,22 @@ download_mnist:
 	mv t10k-labels-idx1-ubyte ~/content/
 
 # Compile the program that will perform training inference and tests on the CPU
-titest:
+mnist_titest_on_cpu:
 	mkdir -p bin
-	g++ src/mnist_titest.cpp -o bin/mnist_titest -Wall -Wextra -std=c++11
+	g++ src/mnist_titest_on_cpu.cpp -o bin/mnist_titest_on_cpu -Wall -Wextra -std=c++11
 
 # Compile the program that will perform training inference and tests on the GPUs
-titestongpu:
+mnist_titest_on_gpu:
 	mkdir -p bin
 	nvcc src/mnist_titest_on_gpu.cpp -o bin/mnist_titest_on_gpu -std=c++11 -lcudnn -lcublas
 
 all:
-	$(MAKE) titest
-	$(MAKE) titestongpu
+	$(MAKE) mnist_titest_on_cpu
+	$(MAKE) mnist_titest_on_gpu
 
 run:
 	@echo "Running MNIST training, inference, and test on CPU..."
-	./bin/mnist_titest
+	./bin/mnist_titest_on_cpu
 	@echo "Running MNIST training, inference, and test on GPU..."
 	./bin/mnist_titest_on_gpu
 
