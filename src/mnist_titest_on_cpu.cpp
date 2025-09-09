@@ -179,7 +179,7 @@ struct NeuralNetwork {
     void backward(const std::vector<double>& input, const std::vector<double>& hidden_output, const std::vector<double>& output, int target_label, double learning_rate) {
         std::vector<double> output_errors(output.size());
         for (size_t i = 0; i < output.size(); ++i) {
-            output_errors[i] = (i == target_label ? 1.0 : 0.0) - output[i];
+            output_errors[i] = (i == static_cast<size_t>(target_label) ? 1.0 : 0.0) - output[i];
         }
 
         std::vector<double> hidden_errors(hidden_output.size());
