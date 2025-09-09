@@ -1,3 +1,4 @@
+#include <vector>
 #include <cudnn.h>
 
 #include "nn_gpu.h"
