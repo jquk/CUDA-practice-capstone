@@ -41,5 +41,6 @@
 *.dwo
 
 README-dev.md
+content/*
 bin/*
 collab/*
