@@ -8,7 +8,6 @@ CONTENT_DIR := $(CURRENT_DIR)/$(CONTENT_RELATIVE)
 # MNIST_URL := http://yann.lecun.com/exdb/mnist
 MNIST_URL := https://storage.googleapis.com/tensorflow/tf-keras-datasets
 
-
 .PHONY: info
 info:
 	@echo "Content directory: $(CONTENT_DIR)"
