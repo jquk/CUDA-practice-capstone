@@ -36,7 +36,7 @@ int main() {
 
     // Training parameters
     int epochs = 5; // Example number of epochs
-    double learning_rate = 0.1; // Example learning rate
+    double learning_rate = 0.01; // Example learning rate (0.1 might be too high, better try with 0.01 or even 0.001), or implement 'learning rate decay'.
 
     // Training loop
     std::cout << "Starting training..." << std::endl;
