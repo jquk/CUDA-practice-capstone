@@ -41,9 +41,20 @@
 // Template functions must be defined in header files when they're used across multiple compilation units.
 
 // Function to allocate device memory
-template<typename T> T* allocate_device_memory(size_t size) {
-    T* device_ptr;
-    CUDA_CHECK(cudaMalloc(&device_ptr, size * sizeof(T)));
+// template<typename T> T* allocate_device_memory(size_t size) {
+//     T* device_ptr;
+//     CUDA_CHECK(cudaMalloc(&device_ptr, size * sizeof(T)));
+//     return device_ptr;
+// }
+
+template <typename T> T* allocate_device_memory(size_t size) {
+    T* device_ptr = nullptr;
+    // Cast to void** to fix the type conversion error
+    cudaError_t err = cudaMalloc(reinterpret_cast<void**>(&device_ptr), size * sizeof(T));
+    if (err != cudaSuccess) {
+        std::cerr << "Failed to allocate device memory: " << cudaGetErrorString(err) << std::endl;
+        exit(EXIT_FAILURE);
+    }
     return device_ptr;
 }
 
