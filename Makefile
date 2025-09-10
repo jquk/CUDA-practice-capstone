@@ -53,7 +53,7 @@ build-for-cpu: $(SOURCES)
 .PHONY: build-for-gpu
 build-for-gpu: $(SOURCES)
 	mkdir -p bin
-	nvcc $(CXXFLAGS) src/mnist_titest_on_gpu.cpp lib/nn_gpu.cpp lib/gpu_helpers.cpp lib/helpers.cpp -o bin/mnist_titest_on_gpu -std=c++11 -lcudnn -lcublas
+	nvcc $(CXXFLAGS) src/mnist_titest_on_gpu.cpp lib/nn_gpu.cpp lib/gpu_helpers.cu lib/helpers.cpp -o bin/mnist_titest_on_gpu -std=c++11 -lcudnn -lcublas
 
 .PHONY: run-all
 run-all: run-mnist_titest_on_cpu run-mnist_titest_on_gpu

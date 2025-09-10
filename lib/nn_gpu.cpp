@@ -3,7 +3,7 @@
 #include <random>
 
 #include "nn_gpu.h"
-#include "gpu_helpers.h"
+#include "gpu_helpers.cuh"
 
 // Define the structure for a simple neural network model (MLP) with GPU support
 // NeuralNetworkGPU::NeuralNetworkGPU() : value(0) {}
