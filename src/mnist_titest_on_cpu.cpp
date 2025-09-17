@@ -9,9 +9,21 @@
 #include "../lib/nn_cpu.h"
 #include "../lib/helpers.h"
 
-int main() {
+int main(int argc, char *argv[]) {
     // Start measuring time
     auto start = std::chrono::high_resolution_clock::now();
+
+    // Declare training parameters, some are defined now, some (input_size) later
+    int input_layer_size; // This parameter will be defined later on, based on the size of each of the images in the training data set
+    int hidden_layer_size;
+    int output_layer_size = 10; // 0-9 digits
+    int epochs;
+    double learning_rate; // Example learning rate (0.1 might be too high, better try with 0.01 or even 0.001), or implement 'learning rate decay'.
+
+    // Validate program input parameters given (0 if there are NO ERRORS)
+    if(validate_program_input_parameters(argc, (const char**)argv, &epochs, &hidden_layer_size, &learning_rate)) {
+        return 1;
+    }
 
     // Load training data
     std::vector<std::vector<double>> train_images = read_mnist_images(DATA_DIR "train-images-idx3-ubyte");
@@ -26,17 +38,11 @@ int main() {
         return 1;
     }
 
-    // Define network parameters
-    int input_size = train_images[0].size();
-    int hidden_size = 128; // Example hidden layer size
-    int output_size = 10; // 0-9 digits
+    // Define network parameter input_size, based on the expected size for each training image
+    input_layer_size = train_images[0].size();
 
     // Create neural network
-    NeuralNetworkCPU model(input_size, hidden_size, output_size);
-
-    // Training parameters
-    int epochs = 5; // Example number of epochs
-    double learning_rate = 0.01; // Example learning rate (0.1 might be too high, better try with 0.01 or even 0.001), or implement 'learning rate decay'.
+    NeuralNetworkCPU model(input_layer_size, hidden_layer_size, output_layer_size);
 
     // Training loop
     std::cout << "Starting training..." << std::endl;

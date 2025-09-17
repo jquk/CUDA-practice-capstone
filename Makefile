@@ -14,7 +14,7 @@ info:
 	@ls -la $(CONTENT_DIR)/
 
 .PHONY: all
-all: download-mnist extract clean build run
+all: download-mnist clean build-all
 
 .PHONY: download-mnist
 # Download MNIST digits dataset and move it to the expected path
@@ -24,6 +24,7 @@ download-mnist:
 	wget $(MNIST_URL)/train-labels-idx1-ubyte.gz -P $(CONTENT_DIR)/
 	wget $(MNIST_URL)/t10k-images-idx3-ubyte.gz -P $(CONTENT_DIR)/
 	wget $(MNIST_URL)/t10k-labels-idx1-ubyte.gz -P $(CONTENT_DIR)/
+	$(MAKE) extract
 
 .PHONY: extract
 extract:
@@ -55,14 +56,18 @@ build-for-gpu: $(SOURCES)
 	nvcc $(CXXFLAGS) src/mnist_titest_on_gpu.cpp lib/nn_gpu.cpp lib/gpu_helpers.cu lib/helpers.cpp -o bin/mnist_titest_on_gpu -std=c++11 -lcudnn -lcublas
 
 .PHONY: run-all
-run-all: run-mnist_titest_on_cpu run-mnist_titest_on_gpu
+run-all:
+	@echo "Running MNIST training, inference, and test on CPU, passing example program parameter values 5 128 0.01"
+	@echo "Running MNIST training, inference, and test on GPU, passing example program parameter values 5 128 0.01"
+	./bin/mnist_titest_on_gpu $(ARGS)
+	./bin/mnist_titest_on_cpu $(ARGS)
 
 .PHONY: run-on-cpu
 run-on-cpu:
 	@echo "Running MNIST training, inference, and test on CPU..."
-	./bin/mnist_titest_on_cpu
+	./bin/mnist_titest_on_cpu $(ARGS)
 
 .PHONY: run-on-gpu
 run-on-gpu:
 	@echo "Running MNIST training, inference, and test on GPU..."
-	./bin/mnist_titest_on_gpu
+	./bin/mnist_titest_on_gpu $(ARGS)

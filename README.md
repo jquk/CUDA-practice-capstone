@@ -36,7 +36,7 @@ The project is implemented in C++ with CUDA extensions. To build and run the pro
 
 1. **Download the MNIST Dataset:** The required MNIST dataset files need to be downloaded from a public mirror. You can simply run the command `make download_mnist`.
 
-- **Note:** The programs expect to find these assets under the following path: `/content`, but the Makefile rule already takes care of placing the dataset there.
+- **Note:** The programs expect to find these assets under the following path: `/content`, but the Makefile rule already takes care of placing the dataset there, and it will also extract the data set.
 
 2. **Compile the Code:**
 Check the Makefile.
@@ -48,7 +48,56 @@ Run the compiled executables.
 
 # System Requirements
 Execution of the compiled code requires a CUDA-enabled GPU and compatible CUDA driver and runtime versions.
-The GPU and NVIDIA driver used during the development were:
+The GPU and NVIDIA driver **used during the development** were:
 - NVIDIA GPU: GeForce RTX 5090.
 - NVIDIA driver version: 575.64.03.
 - CUDA version: 12.9.
+
+# Full Build, Compilation and Run Example
+```
+# Clone the project:
+git clone https://github.com/jquk/CUDA-practice-capstone.git
+cd CUDA-practice-capstone
+
+# download and extracts dataset:
+make download-mnist
+
+# build both programs for the cpu and the gpu:
+make build-all
+
+# runs both programs, passing them the params = {epochs, hidden_layers_size, learning_rate}
+make run-all ARGS="5 128 0.001"
+```
+
+And the final **output** from the cpu-version and the gpu-version programs should look like this:
+```
+root@3001e1f044d3:/app/CUDA-practice-capstone# ./bin/mnist_titest_on_cpu 5 128 0.01
+Parameters accepted:
+ - epochs = 5
+ - hidden_layer_size = 128
+ - learning_rate = 0.010000
+Starting training...
+Epoch 0 completed. Average loss: 0.619917
+Epoch 1 completed. Average loss: 0.417883
+Epoch 2 completed. Average loss: 0.379473
+Epoch 3 completed. Average loss: 0.356101
+Epoch 4 completed. Average loss: 0.338258
+Training finished.
+Test accuracy: 86.61%
+Total execution time: 294.405 seconds
+root@3001e1f044d3:/app/CUDA-practice-capstone# ./bin/mnist_titest_on_gpu 5 128 0.01
+Parameters accepted:
+ - epochs = 5
+ - hidden_layer_size = 128
+ - learning_rate = 0.010000
+Starting GPU training...
+Epoch 0 completed. Average loss: 0.616009
+Epoch 1 completed. Average loss: 0.416489
+Epoch 2 completed. Average loss: 0.378392
+Epoch 3 completed. Average loss: 0.35467
+Epoch 4 completed. Average loss: 0.336927
+GPU Training finished.
+GPU Test accuracy: 86.65%
+Total execution time: 16.1407 seconds
+root@3001e1f044d3:/app/CUDA-practice-capstone#
+```

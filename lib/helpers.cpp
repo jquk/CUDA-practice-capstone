@@ -3,7 +3,11 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-
+// #include <stdio.h>
+// #include <stdlib.h>
+#include "../cfg/cfg.h"
+#include <errno.h>
+#include <ctype.h>
 
 // Function to read MNIST label file
 std::vector<int> read_mnist_labels(const std::string& filename) {
@@ -81,4 +85,57 @@ std::vector<std::vector<double>> read_mnist_images(const std::string& filename) 
 
     file.close();
     return images;
+}
+
+// Function to verify that the given parameter is an integer
+int is_valid_int(const char *str, int *out) {
+    char *endptr;
+    errno = 0;
+    long val = strtol(str, &endptr, 10);
+    if (errno != 0 || *endptr != '\0') return 0;
+    *out = (int)val;
+    return 1;
+}
+
+// Function to verify that the given parameter is a float
+int is_valid_float(const char *str, double *out) {
+    char *endptr;
+    errno = 0;
+    double val = strtod(str, &endptr);
+    if (errno != 0 || *endptr != '\0') return 0;
+    *out = val;
+    return 1;
+}
+
+// Function to validate the program's input parameters given by the user
+int validate_program_input_parameters(int argc, const char *argv[], int *epochs, int *hidden_layer_size, double *learning_rate) {
+    if (argc != 4) {
+        printf("Usage: %s <training epochs:1-100> <neural network's hidden_layer:100-500> <neural network's learning_rate:0.00001-0.1>\n", argv[0]);
+        return 1;
+    }
+
+    if (!is_valid_int(argv[1], epochs) || *epochs < EPOCHS_MIN || *epochs > EPOCHS_MAX) {
+        printf("Error: epochs must be an integer between 1 and 100.\n");
+        printf("Usage: %s <training epochs:%d-%d> <neural network's hidden_layer:%d-%d> <neural network's learning_rate:%f-%f\n", argv[1], EPOCHS_MIN, EPOCHS_MAX, HIDDEN_LAYERS_SIZE_MIN, HIDDEN_LAYERS_SIZE_MAX, LEARNING_RATE_MIN, LEARNING_RATE_MAX );
+        return 1;
+    }
+
+    if (!is_valid_int(argv[2], hidden_layer_size) || *hidden_layer_size < HIDDEN_LAYERS_SIZE_MIN || *hidden_layer_size > HIDDEN_LAYERS_SIZE_MAX) {
+        printf("Error: hidden_layer_size must be an integer between 100 and 500.\n");
+        printf("Usage: %s <training epochs:%d-%d> <neural network's hidden_layer:%d-%d> <neural network's learning_rate:%f-%f\n", argv[1], EPOCHS_MIN, EPOCHS_MAX, HIDDEN_LAYERS_SIZE_MIN, HIDDEN_LAYERS_SIZE_MAX, LEARNING_RATE_MIN, LEARNING_RATE_MAX );
+        return 1;
+    }
+
+    if (!is_valid_float(argv[3], learning_rate) || *learning_rate < LEARNING_RATE_MIN || *learning_rate > LEARNING_RATE_MAX) {
+        printf("Error: learning_rate must be a float between 0.00001 and 0.1.\n");
+        printf("Usage: %s <training epochs:%d-%d> <neural network's hidden_layer:%d-%d> <neural network's learning_rate:%f-%f\n", argv[1], EPOCHS_MIN, EPOCHS_MAX, HIDDEN_LAYERS_SIZE_MIN, HIDDEN_LAYERS_SIZE_MAX, LEARNING_RATE_MIN, LEARNING_RATE_MAX );
+        return 1;
+    }
+
+    printf("Parameters accepted:\n");
+    printf(" - epochs = %d\n", *epochs);
+    printf(" - hidden_layer_size = %d\n", *hidden_layer_size);
+    printf(" - learning_rate = %f\n", *learning_rate);
+
+    return 0;
 }

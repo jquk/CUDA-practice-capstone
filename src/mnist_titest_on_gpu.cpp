@@ -14,9 +14,21 @@
 #include "../lib/gpu_helpers.cuh"
 #include "../lib/helpers.h"
 
-int main() {
+int main(int argc, char *argv[]) {
     // Start measuring time
     auto start = std::chrono::high_resolution_clock::now();
+
+    // Declare training parameters, some are defined now, some (input_layer_size) later
+    int input_layer_size; // This parameter will be defined later on, based on the size of each of the images in the training data set
+    int hidden_layer_size;
+    int output_layer_size = 10; // 0-9 digits
+    int epochs;
+    double learning_rate; // Example learning rate (0.1 might be too high, better try with 0.01 or even 0.001), or implement 'learning rate decay'.
+
+    // Validate program input parameters given (0 if there are NO ERRORS)
+    if(validate_program_input_parameters(argc, (const char**)argv, &epochs, &hidden_layer_size, &learning_rate)) {
+        return 1;
+    }
 
     // Load training data
     std::vector<std::vector<double>> train_images = read_mnist_images(DATA_DIR "train-images-idx3-ubyte");
@@ -31,17 +43,11 @@ int main() {
         return 1;
     }
 
-    // Define network parameters
-    int input_size = train_images[0].size();
-    int hidden_size = 128; // Example hidden layer size
-    int output_size = 10; // 0-9 digits
+    // Define network parameter input_layer_size, based on the expected size for each training image
+    input_layer_size = train_images[0].size();
 
     // Create neural network on GPU
-    NeuralNetworkGPU model(input_size, hidden_size, output_size);
-
-    // Training parameters
-    int epochs = 5; // Example number of epochs
-    double learning_rate = 0.01; // Adjusted learning rate for GPU training
+    NeuralNetworkGPU model(input_layer_size, hidden_layer_size, output_layer_size);
 
     // Training loop
     std::cout << "Starting GPU training..." << std::endl;
@@ -49,14 +55,14 @@ int main() {
         double total_loss = 0.0;
         for (size_t i = 0; i < train_images.size(); ++i) {
             // Transfer input data to device
-            host_to_device(train_images[i].data(), model.d_input, input_size);
+            host_to_device(train_images[i].data(), model.d_input, input_layer_size);
 
             // Forward pass on GPU
             model.forward_gpu(model.d_input);
 
             // Calculate loss (Cross-entropy) on host after transferring output
-            std::vector<double> h_output(output_size);
-            device_to_host(model.d_output, h_output.data(), output_size);
+            std::vector<double> h_output(output_layer_size);
+            device_to_host(model.d_output, h_output.data(), output_layer_size);
             total_loss -= log(h_output[train_labels[i]]);
 
             // Backward pass on GPU
@@ -70,7 +76,7 @@ int main() {
     int correct_predictions = 0;
     for (size_t i = 0; i < test_images.size(); ++i) {
         // Transfer test image to device
-        host_to_device(test_images[i].data(), model.d_input, input_size);
+        host_to_device(test_images[i].data(), model.d_input, input_layer_size);
 
         // Predict on GPU
         int predicted_label = model.predict_gpu(model.d_input);
