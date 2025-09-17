@@ -31,21 +31,6 @@ The core computational parts of the network, specifically matrix multiplications
 
 Note that even in the GPU-oriented program the data loading and initial setup are handled on the host (CPU), while the forward and backward passes during training and the forward pass during inference are performed on the host for the CPU-oriented program and on the GPU for the GPU-oriented program.
 
-# Building and Execution
-The project is implemented in C++ with CUDA extensions. To build and run the project in a compatible environment, follow these steps:
-
-1. **Download the MNIST Dataset:** The required MNIST dataset files need to be downloaded from a public mirror. You can simply run the command `make download_mnist`.
-
-- **Note:** The programs expect to find these assets under the following path: `/content`, but the Makefile rule already takes care of placing the dataset there, and it will also extract the data set.
-
-2. **Compile the Code:**
-Check the Makefile.
-- Run `make all`, which will build both programs, the one for the CPU and the one for the GPU.
-
-3. **Execute the Programs:**
-Run the compiled executables.
-- Run `make run` to run both programs, firstly the CPU-oriented program and secondly the GPU-oriented program.
-
 # System Requirements
 Execution of the compiled code requires a CUDA-enabled GPU and compatible CUDA driver and runtime versions.
 The GPU and NVIDIA driver **used during the development** were:
