@@ -68,7 +68,7 @@ make build-all
 # runs both programs, passing them the params = {epochs, hidden_layers_size, learning_rate}
 make run-all ARGS="5 128 0.001"
 
-# And the final **output** from the cpu-version and the gpu-version programs should look like this:
+# And the final output from the cpu-version and the gpu-version programs should look like this:
 root@3001e1f044d3:/app/CUDA-practice-capstone# ./bin/mnist_titest_on_cpu 5 128 0.01
 Parameters accepted:
  - epochs = 5
