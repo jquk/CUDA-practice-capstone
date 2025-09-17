@@ -13,9 +13,9 @@ Although what's demonstrated is the **advantages of integrating GPU acceleration
 The project implements a two-layer fully connected neural network (MLP) (same for both programs).
 Note that computation layers are only one hidden and one output layer.
 
-* **Input Layer:** Takes the flattened 28x28 MNIST images.
-* **Hidden Layer:** A fully connected layer with a sigmoid activation function.
-* **Output Layer:** A fully connected layer with a softmax activation for classification across 10 digits.
+* **Input Layer:** Takes the flattened 28x28 MNIST images, and its size is calculated in the program before building the neural network.
+* **Hidden Layer:** A configurable size (first program input parameter) fully connected layer with a sigmoid activation function.
+* **Output Layer:** A size 10 (for ten possible outputs, i.e. digits 0 to 9) fully connected layer with a softmax activation for classification across 10 digits.
 
 Both programs have a similar flow:
 1. Load the MNIST digits dataset.
