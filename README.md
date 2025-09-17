@@ -56,7 +56,7 @@ The GPU and NVIDIA driver **used during the development** were:
 # Full Build, Compilation and Run Example
 ```
 # Clone the project:
-git clone https://github.com/jquk/CUDA-practice-capstone.git
+git clone git@github.com:jquk/CUDA-practice-capstone.git
 cd CUDA-practice-capstone
 
 # download and extracts dataset:
