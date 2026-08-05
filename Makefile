@@ -71,3 +71,14 @@ run-on-cpu:
 run-on-gpu:
 	@echo "Running MNIST training, inference, and test on GPU..."
 	./bin/mnist_titest_on_gpu $(ARGS)
+
+
+#-----------------------#
+# QUANTIZATION RECIPEES #
+#-----------------------#
+
+mnist_test_on_cpu_quantization: src/quantization/mnist_test_on_cpu_quantization.cpp
+	g++ -O3 -std=c++11 -o build/quantization/mnist_test_on_cpu_quantization src/quantization/mnist_test_on_cpu_quantization.cpp
+
+export_quantized_weights: src/quantization/export_quantized_weights.cpp
+	g++ -O3 -std=c++11 -o build/quantization/export_weights src/quantization/export_quantized_weights.cpp
