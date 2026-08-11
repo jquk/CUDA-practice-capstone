@@ -56,7 +56,7 @@ make run-all ARGS="5 128 0.001"
 
 And the final **output** from the cpu-version and the gpu-version programs should look like this:
 ```
-root@3001e1f044d3:/app/CUDA-practice-capstone# ./bin/mnist_titest_on_cpu 5 128 0.01
+root@3001e1f044d3:/app/CUDA-practice-capstone# ./build/bin/mnist_titest_on_cpu 5 128 0.01
 Parameters accepted:
  - epochs = 5
  - hidden_layer_size = 128
@@ -70,7 +70,7 @@ Epoch 4 completed. Average loss: 0.338258
 Training finished.
 Test accuracy: 86.61%
 Total execution time: 294.405 seconds
-root@3001e1f044d3:/app/CUDA-practice-capstone# ./bin/mnist_titest_on_gpu 5 128 0.01
+root@3001e1f044d3:/app/CUDA-practice-capstone# ./build/bin/mnist_titest_on_gpu 5 128 0.01
 Parameters accepted:
  - epochs = 5
  - hidden_layer_size = 128
@@ -85,4 +85,35 @@ GPU Training finished.
 GPU Test accuracy: 86.65%
 Total execution time: 16.1407 seconds
 root@3001e1f044d3:/app/CUDA-practice-capstone#
+```
+
+---
+
+# Quantization
+
+## Overview
+The **quantization** section of this project includes a complete **INT8 quantization** pipeline that **compresses a neural network to fit on an Arduino Uno** (32KB Flash, 2KB RAM). The quantized model achieves close to 80% accuracy on the MNIST handwritten digit dataset using only ~490 bytes for weights.
+
+## Architecture
+
+The tiny model uses a heavily compressed architecture:
+- **Input**: 49 neurons (7×7 downsampled MNIST digits)
+- **Hidden**: 8 neurons with ReLU activation
+- **Output**: 10 neurons (digits 0-9)
+- **Total parameters**: 490 (fits in ~500 bytes as INT8)
+  -    W1: 49 × 8 = 392 parameters (input-layer-to-hidden-layer weights)
+  -    b1: 8 parameters (hidden layer biases)
+  -    W2: 8 × 10 = 80 parameters (hidden-layer-to-output-layer weights)
+  -    b2: 10 parameters (output layer biases)
+  -    Total = 392 + 8 + 80 + 10 = 490 parameters.
+
+## Quantization Approach
+- **Symmetric INT8 quantization**: Weights mapped to [-128, 127]
+- **4× memory reduction**: Float32 (4 bytes) → INT8 (1 byte)
+
+## Quick Start
+
+```bash
+# Train the quantized model (runs on PC)
+make train-tiny
 ```
