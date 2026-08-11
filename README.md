@@ -116,4 +116,7 @@ The tiny model uses a heavily compressed architecture:
 ```bash
 # Train the quantized model (runs on PC)
 make train-tiny
+
+# Compare float32 vs INT8 accuracy
+make test-quant
 ```

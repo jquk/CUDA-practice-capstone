@@ -104,6 +104,13 @@ train-tiny: $(BUILD_DIR)/train_tiny_model
 $(BUILD_DIR)/train_tiny_model: $(QUANT_DIR)/train_tiny_model.cpp $(BUILD_DIR)/quantize_utils.o
 	g++ -O3 -std=c++17 $^ -o $@
 
+# Test quantization accuracy
+test-quantized: $(BUILD_DIR)/test_quantized
+	./$(BUILD_DIR)/test_quantized
+
+$(BUILD_DIR)/test_quantized: $(QUANT_DIR)/test_quantized.cpp $(BUILD_DIR)/quantize_utils.o
+	g++ -O3 -std=c++11 $^ -o $@
+
 help:
 	@echo "TRAINING & INFERENCE IN CPU AND GPU:"
 	@echo "  make info                     - Show where the dataset and build directories are and their contents."
@@ -124,3 +131,9 @@ help:
 	@echo "                                  pass parameters as in \`make run-all\`."
 	@echo "QUANTIZATION & MICROCONTROLLER TARGETS:"
 	@echo "  make train-tiny               - Train 7x7→8→10 model"
+	@echo "  make test-quantized           - Compare float vs INT8 accuracy"
+	@echo "  make arduino-uno-headers      - Generate Arduino Uno headers"
+	@echo "  make mcu-headers              - Generate generic MCU headers"
+	@echo "  make arduino-uno              - Full Uno pipeline (train + headers)"
+	@echo "  make test-arduino-uno-serial  - Test Arduino over serial"
+	@echo "  make clean-quant              - Clean quantization artifacts"
